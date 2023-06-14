@@ -44,9 +44,21 @@ namespace WebApi.Aplicacion.Servicios
             return clientes.Adapt<IReadOnlyList<ClienteResponseDto>>();
         }
 
-        public Task Actualizar(int id, ClienteRequestDto request)
+        public async Task Actualizar(int id, ClienteRequestDto request)
         {
-            throw new NotImplementedException();
+            var cliente = await _clienteRepo.GetEntityAsync(x => x.Id == id);
+
+            if(cliente == null)
+            {
+                throw new CustomException(HttpStatusCode.NotFound, new
+                {
+                    mensaje = "No se encuentra el registro seleccionado"
+                });
+            }
+            request.Id = id;
+            var clienteAct = request.Adapt<Cliente>();
+
+            await _clienteRepo.UpdateAsync(clienteAct);
         }
 
         public async Task Crear(ClienteRequestDto request)
@@ -55,9 +67,20 @@ namespace WebApi.Aplicacion.Servicios
             await _clienteRepo.AddAsync(cliente);
         }
 
-        public Task Eliminar(int id)
+        public async Task Eliminar(int id)
         {
-            throw new NotImplementedException();
+            var cliente = await _clienteRepo.GetEntityAsync(x => x.Id == id);
+
+            if (cliente == null)
+            {
+                throw new CustomException(HttpStatusCode.NotFound, new
+                {
+                    mensaje = "No se encuentra el registro seleccionado"
+                });
+            }
+
+            await _clienteRepo.DeleteAsync(cliente);
+
         }
 
         public Task<int> MaximoId()

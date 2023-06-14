@@ -32,7 +32,7 @@ namespace WebApi.Aplicacion.Servicios
             if (usuario == null)
             {
                 throw new CustomException(HttpStatusCode.NotFound, 
-                    new {  mensje = $"No se encuentra el usuario ${request.Username} registrado" });
+                    new {  mensaje = $"No se encuentra el usuario {request.Username} registrado" });
             }
 
             if (!BCrypt.Net.BCrypt.Verify(request.Password, usuario.Password))

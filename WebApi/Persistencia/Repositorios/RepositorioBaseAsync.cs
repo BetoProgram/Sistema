@@ -123,8 +123,9 @@ namespace WebApi.Persistencia.Repositorios
 
         public async Task<T> UpdateAsync(T entity)
         {
-            _context.Set<T>().Attach(entity);
-            _context.Entry(entity).State = EntityState.Modified;
+            //_context.Set<T>().Attach(entity);
+            //_context.Entry(entity).State = EntityState.Modified;
+            _context.Set<T>().Update(entity);
             await _context.SaveChangesAsync();
             return entity;
         }

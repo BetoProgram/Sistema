@@ -39,16 +39,20 @@ namespace WebApi.Controllers
             return Ok();
         }
 
-        //// PUT api/<ClientesController>/5
-        //[HttpPut("{id}")]
-        //public void Put(int id, [FromBody] string value)
-        //{
-        //}
+        // PUT api/<ClientesController>/5
+        [HttpPut("{id}")]
+        public async Task<ActionResult> Put(int id, [FromBody] ClienteRequestDto request)
+        {
+            await _clienteRepo.Actualizar(id, request);
+            return NoContent();
+        }
 
         //// DELETE api/<ClientesController>/5
-        //[HttpDelete("{id}")]
-        //public void Delete(int id)
-        //{
-        //}
+        [HttpDelete("{id}")]
+        public async Task<ActionResult> Delete(int id)
+        {
+            await _clienteRepo.Eliminar(id);
+            return NoContent();
+        }
     }
 }

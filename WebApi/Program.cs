@@ -28,6 +28,7 @@ builder.Services.AddControllers(opt =>
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddScoped(typeof(IRepositoryBaseAsync<>), typeof(RepositoryBaseAsync<>));
 builder.Services.AddScoped<IClienteRepositorio, ClienteService>();
+builder.Services.AddScoped<IProductoRepositorio, ProductoService>();
 builder.Services.AddScoped<IAuthService, AuthService>();
 builder.Services.Configure<JwtSettings>(builder.Configuration.GetSection("JwtSettings"));
 
